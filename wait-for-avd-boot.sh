@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
+ 
+OUT=`/sdk/platform-tools/adb shell getprop sys.boot_completed`
+RES="1"
 
-OUT=`/sdk/platform-tools/adb shell getprop init.svc.bootanim`
-RES="stopped"
-
-while [[ ${OUT:0:7}  != 'stopped' ]]; do
-		OUT=`/sdk/platform-tools/adb shell getprop init.svc.bootanim`
+while [[ ${OUT:0:1}  != $RES ]]; do
+		OUT=`/sdk/platform-tools/adb shell getprop sys.boot_completed`
 		echo 'Waiting for emulator to fully boot...'
 		sleep 5
 done
